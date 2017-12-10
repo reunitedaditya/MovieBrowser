@@ -16,6 +16,8 @@
 		489B17081FDD186500EE7C5C /* MovieGridViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 489B17061FDD186500EE7C5C /* MovieGridViewController.xib */; };
 		489B170C1FDD1A0D00EE7C5C /* MovieCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B170A1FDD1A0D00EE7C5C /* MovieCollectionViewCell.swift */; };
 		489B170D1FDD1A0D00EE7C5C /* MovieCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 489B170B1FDD1A0D00EE7C5C /* MovieCollectionViewCell.xib */; };
+		48A86CB91FDD4C56000F471F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48A86CB71FDD4C56000F471F /* SearchViewController.swift */; };
+		48A86CBA1FDD4C56000F471F /* SearchViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 48A86CB81FDD4C56000F471F /* SearchViewController.xib */; };
 		CAAA6323B2A47EE7C1B44EBA /* Pods_MovieBrowser.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED7E33B75988057D4F0AF617 /* Pods_MovieBrowser.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +34,8 @@
 		489B17061FDD186500EE7C5C /* MovieGridViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieGridViewController.xib; sourceTree = "<group>"; };
 		489B170A1FDD1A0D00EE7C5C /* MovieCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCollectionViewCell.swift; sourceTree = "<group>"; };
 		489B170B1FDD1A0D00EE7C5C /* MovieCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieCollectionViewCell.xib; sourceTree = "<group>"; };
+		48A86CB71FDD4C56000F471F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		48A86CB81FDD4C56000F471F /* SearchViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchViewController.xib; sourceTree = "<group>"; };
 		D403F4358BB22C97E47CD408 /* Pods-MovieBrowser.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieBrowser.release.xcconfig"; path = "Pods/Target Support Files/Pods-MovieBrowser/Pods-MovieBrowser.release.xcconfig"; sourceTree = "<group>"; };
 		ED7E33B75988057D4F0AF617 /* Pods_MovieBrowser.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieBrowser.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -95,6 +99,8 @@
 			children = (
 				489B17051FDD186500EE7C5C /* MovieGridViewController.swift */,
 				489B17061FDD186500EE7C5C /* MovieGridViewController.xib */,
+				48A86CB71FDD4C56000F471F /* SearchViewController.swift */,
+				48A86CB81FDD4C56000F471F /* SearchViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -180,6 +186,7 @@
 			files = (
 				489B170D1FDD1A0D00EE7C5C /* MovieCollectionViewCell.xib in Resources */,
 				489B16FD1FDD16FD00EE7C5C /* LaunchScreen.storyboard in Resources */,
+				48A86CBA1FDD4C56000F471F /* SearchViewController.xib in Resources */,
 				489B17081FDD186500EE7C5C /* MovieGridViewController.xib in Resources */,
 				489B16FA1FDD16FD00EE7C5C /* Assets.xcassets in Resources */,
 				489B16F81FDD16FD00EE7C5C /* Main.storyboard in Resources */,
@@ -251,6 +258,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48A86CB91FDD4C56000F471F /* SearchViewController.swift in Sources */,
 				489B16F51FDD16FD00EE7C5C /* ViewController.swift in Sources */,
 				489B16F31FDD16FD00EE7C5C /* AppDelegate.swift in Sources */,
 				489B17071FDD186500EE7C5C /* MovieGridViewController.swift in Sources */,

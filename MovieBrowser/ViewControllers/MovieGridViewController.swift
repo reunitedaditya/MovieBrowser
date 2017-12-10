@@ -32,6 +32,16 @@ class MovieGridViewController: UIViewController {
         movieCollectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier:"MovieCell")
         
         fetchMovies(page: 1)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(addTapped))
+        navigationController?.navigationBar.tintColor = .black
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        navigationController?.isNavigationBarHidden = false
+        
     }
     
     func fetchMovies(page : Int){
@@ -53,9 +63,10 @@ class MovieGridViewController: UIViewController {
                             if let moviePosterPath = movie["poster_path"] as? String {
                                 
                                self.moviePosterPaths.append(moviePosterPath)
+                                self.movieNames.append(movieName)
                             }
                             
-                            self.movieNames.append(movieName)
+                            
                            
                         }
                     }
@@ -68,6 +79,15 @@ class MovieGridViewController: UIViewController {
             }
 
         }
+    }
+    
+    
+    
+    @objc func addTapped(){
+        
+        let searchController = SearchViewController(nibName: "SearchViewController", bundle: nil)
+        self.navigationController?.pushViewController(searchController, animated: true)
+        
     }
     
     
@@ -93,7 +113,7 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let lastItem = self.movieNames.count - 1
+        let lastItem = self.movieNames.count - 3
         
         if indexPath.row == lastItem {
      
@@ -122,7 +142,7 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width : movieCollectionView.bounds.width/3.0 - 1 , height : 170)
+        return CGSize(width : movieCollectionView.bounds.width/3.0 - 1 , height : 150)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

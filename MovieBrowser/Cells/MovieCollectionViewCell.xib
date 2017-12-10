@@ -21,30 +21,30 @@
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ahi-So-VtA">
                         <rect key="frame" x="0.0" y="0.0" width="119" height="150"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9B5-le-rHW">
-                        <rect key="frame" x="38" y="109" width="42" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9B5-le-rHW">
+                        <rect key="frame" x="3" y="129" width="113" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
             </view>
-            <color key="backgroundColor" red="0.57919406890000003" green="0.1280144453" blue="0.57268613580000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="ahi-So-VtA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="4TS-iQ-sZ9"/>
-                <constraint firstItem="ZTg-uK-7eu" firstAttribute="bottom" secondItem="9B5-le-rHW" secondAttribute="bottom" constant="20" id="J1G-52-HNm"/>
-                <constraint firstAttribute="trailing" secondItem="ahi-So-VtA" secondAttribute="trailing" id="NXS-MF-hxs"/>
-                <constraint firstItem="ahi-So-VtA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="XCJ-Q9-IFs"/>
-                <constraint firstItem="9B5-le-rHW" firstAttribute="centerX" secondItem="ZTg-uK-7eu" secondAttribute="centerX" id="bJc-6L-0xT"/>
-                <constraint firstAttribute="bottom" secondItem="ahi-So-VtA" secondAttribute="bottom" id="cIW-xY-uiB"/>
+                <constraint firstAttribute="trailing" secondItem="ahi-So-VtA" secondAttribute="trailing" id="4PF-Kl-7ZZ"/>
+                <constraint firstAttribute="bottom" secondItem="ahi-So-VtA" secondAttribute="bottom" id="FoR-i1-Tau"/>
+                <constraint firstItem="9B5-le-rHW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="R1S-c8-KxD"/>
+                <constraint firstAttribute="bottom" secondItem="9B5-le-rHW" secondAttribute="bottom" constant="3" id="cLd-ex-hic"/>
+                <constraint firstAttribute="trailing" secondItem="9B5-le-rHW" secondAttribute="trailing" constant="3" id="glc-hd-UYP"/>
+                <constraint firstItem="ahi-So-VtA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qpL-4Z-sNP"/>
+                <constraint firstItem="ahi-So-VtA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tjh-P0-rNt"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
-            <size key="customSize" width="119" height="150"/>
+            <size key="customSize" width="119" height="192"/>
             <connections>
                 <outlet property="moviePosterView" destination="ahi-So-VtA" id="I9z-4w-fiq"/>
                 <outlet property="movieTitle" destination="9B5-le-rHW" id="0Kg-1Y-lkw"/>
             </connections>
-            <point key="canvasLocation" x="68.5" y="104"/>
+            <point key="canvasLocation" x="68.5" y="125"/>
         </collectionViewCell>
     </objects>
 </document>

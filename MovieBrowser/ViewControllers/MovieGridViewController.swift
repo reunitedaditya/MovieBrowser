@@ -21,6 +21,7 @@ class MovieGridViewController: UIViewController {
     
     var movieNames = [String]()
     var moviePosterPaths = [String]()
+    var movieDescriptions = [String]()
     var pageCount = 1
     
 
@@ -35,6 +36,7 @@ class MovieGridViewController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(addTapped))
         navigationController?.navigationBar.tintColor = .black
+        navigationController?.navigationBar.topItem?.title = "Discover"
     }
     
     
@@ -52,28 +54,26 @@ class MovieGridViewController: UIViewController {
               
                 if let receivedJson = json as? NSDictionary {
                     
-                    print(receivedJson)
-                    
+        
                     if let resultsArray = receivedJson.value(forKey: "results") as? [[String : AnyObject]] {
   
                         for movie in resultsArray {
                            
                             let movieName = movie["original_title"] as! String
+                            let movieDescription = movie["overview"] as! String!
                             
                             if let moviePosterPath = movie["poster_path"] as? String {
                                 
-                               self.moviePosterPaths.append(moviePosterPath)
+                                self.moviePosterPaths.append(moviePosterPath)
                                 self.movieNames.append(movieName)
+                                self.movieDescriptions.append(movieDescription!)
                             }
-                            
-                            
-                           
                         }
                     }
                 }
                 DispatchQueue.main.async {
                     
-                    print(self.moviePosterPaths)
+             
                     self.movieCollectionView.reloadData()
                 }
             }
@@ -125,7 +125,20 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
  
         }
         self.pageCount = self.pageCount + 1
-      
+ 
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let detailedViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
+        
+        detailedViewController.posterImagePath = moviePosterPaths[indexPath.row]
+        detailedViewController.averageRating = "4.5 Stars"
+        detailedViewController.releaseDate = "2017"
+        detailedViewController.movieTitle = movieNames[indexPath.row]
+        detailedViewController.synopsis = movieDescriptions[indexPath.row]
+        
+        self.navigationController?.pushViewController(detailedViewController, animated: true)
         
     }
     

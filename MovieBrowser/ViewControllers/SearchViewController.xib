@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SearchViewController" customModule="MovieBrowser" customModuleProvider="target">
             <connections>
+                <outlet property="activityIndicator" destination="jUF-90-XUq" id="LKW-lm-4uG"/>
+                <outlet property="movieCollectionView" destination="9Tq-C6-FDC" id="dXS-H9-Bsy"/>
                 <outlet property="searchBar" destination="WQ1-14-5DF" id="zLr-lQ-Xlu"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -46,13 +48,19 @@
                         <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                     </collectionViewFlowLayout>
                 </collectionView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="jUF-90-XUq">
+                    <rect key="frame" x="169" y="325.5" width="37" height="37"/>
+                    <color key="color" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="9Tq-C6-FDC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="3WL-dl-O6V"/>
                 <constraint firstItem="WQ1-14-5DF" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="9q2-qo-8vf"/>
                 <constraint firstItem="QuY-ND-IsE" firstAttribute="centerY" secondItem="WQ1-14-5DF" secondAttribute="centerY" id="A2J-1p-hHf"/>
+                <constraint firstItem="jUF-90-XUq" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="O7K-Ie-gRU"/>
                 <constraint firstItem="9Tq-C6-FDC" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="S02-Gh-Pvp"/>
+                <constraint firstItem="jUF-90-XUq" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="V9l-wn-8sJ"/>
                 <constraint firstItem="WQ1-14-5DF" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="WEz-PB-mj0"/>
                 <constraint firstItem="WQ1-14-5DF" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="38" id="cSo-CG-791"/>
                 <constraint firstItem="9Tq-C6-FDC" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="fMw-6b-pNb"/>

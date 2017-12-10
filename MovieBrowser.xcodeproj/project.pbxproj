@@ -61,6 +61,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		482BA6A11FDD75E6001AE460 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		489B16E61FDD16FD00EE7C5C = {
 			isa = PBXGroup;
 			children = (
@@ -82,6 +89,7 @@
 		489B16F11FDD16FD00EE7C5C /* MovieBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				482BA6A11FDD75E6001AE460 /* Models */,
 				489B17091FDD19F600EE7C5C /* Cells */,
 				489B17041FDD184900EE7C5C /* ViewControllers */,
 				489B16F21FDD16FD00EE7C5C /* AppDelegate.swift */,

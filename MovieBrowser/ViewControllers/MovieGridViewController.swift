@@ -32,30 +32,37 @@ class MovieGridViewController: UIViewController {
         case topRated
         case popular
     }
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         movieCollectionView.delegate  = self
         movieCollectionView.dataSource = self
         movieCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         movieCollectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier:"MovieCell")
         
+        
+        
         fetchMovies(page: pageCount, movieFilter: currentFilter)
+        
+        
         
         let barButtonItem = UIBarButtonItem(title: "Popular", style: .plain, target: self, action: #selector(changeFilter))
         leftBarButtonItem = barButtonItem
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(addTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(showSearch))
         navigationController?.navigationBar.tintColor = .black
         navigationItem.leftBarButtonItem = leftBarButtonItem!
         navigationController?.navigationBar.topItem?.title = "Discover"
+        
     }
     
     
     override func viewWillAppear(_ animated: Bool) {
         
         navigationController?.isNavigationBarHidden = false
-        
     }
     
     
@@ -90,8 +97,7 @@ class MovieGridViewController: UIViewController {
                             let movieDescription = movie["overview"] as! String!
                             
                             let movieReleaseDate = movie["release_date"] as! String!
-                            
-                            
+                    
                             if let moviePosterPath = movie["poster_path"] as? String {
                                 
                                 self.moviePosterPaths.append(moviePosterPath)
@@ -116,7 +122,7 @@ class MovieGridViewController: UIViewController {
     
     
     
-    @objc func addTapped(){
+    @objc func showSearch(){
         
         let searchController = SearchViewController(nibName: "SearchViewController", bundle: nil)
         self.navigationController?.pushViewController(searchController, animated: true)
@@ -152,6 +158,9 @@ class MovieGridViewController: UIViewController {
 
 extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
     
+    
+    //CollectionView DataSource and Delegate Methods
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return movieNames.count
@@ -177,12 +186,10 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
             DispatchQueue.global(qos: .background).async {
                 
                 self.fetchMovies(page:  self.pageCount + 1, movieFilter: filter.popular)
-   
+                
             }
- 
         }
         self.pageCount = self.pageCount + 1
- 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -198,6 +205,10 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
         self.navigationController?.pushViewController(detailedViewController, animated: true)
         
     }
+    
+    
+    
+    //CollectionView DelegateFlowLayout Methods
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         

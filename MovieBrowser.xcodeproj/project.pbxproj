@@ -10,7 +10,6 @@
 		482BA6A41FDD7F54001AE460 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482BA6A21FDD7F54001AE460 /* MovieDetailViewController.swift */; };
 		482BA6A51FDD7F54001AE460 /* MovieDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 482BA6A31FDD7F54001AE460 /* MovieDetailViewController.xib */; };
 		489B16F31FDD16FD00EE7C5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B16F21FDD16FD00EE7C5C /* AppDelegate.swift */; };
-		489B16F51FDD16FD00EE7C5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489B16F41FDD16FD00EE7C5C /* ViewController.swift */; };
 		489B16F81FDD16FD00EE7C5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 489B16F61FDD16FD00EE7C5C /* Main.storyboard */; };
 		489B16FA1FDD16FD00EE7C5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 489B16F91FDD16FD00EE7C5C /* Assets.xcassets */; };
 		489B16FD1FDD16FD00EE7C5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 489B16FB1FDD16FD00EE7C5C /* LaunchScreen.storyboard */; };
@@ -29,7 +28,6 @@
 		482BA6A31FDD7F54001AE460 /* MovieDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MovieDetailViewController.xib; sourceTree = "<group>"; };
 		489B16EF1FDD16FD00EE7C5C /* MovieBrowser.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieBrowser.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		489B16F21FDD16FD00EE7C5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		489B16F41FDD16FD00EE7C5C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		489B16F71FDD16FD00EE7C5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		489B16F91FDD16FD00EE7C5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		489B16FC1FDD16FD00EE7C5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -93,11 +91,11 @@
 		489B16F11FDD16FD00EE7C5C /* MovieBrowser */ = {
 			isa = PBXGroup;
 			children = (
+				48DA8F651FDDE8DD002AF7F4 /* Views */,
 				482BA6A11FDD75E6001AE460 /* Models */,
 				489B17091FDD19F600EE7C5C /* Cells */,
 				489B17041FDD184900EE7C5C /* ViewControllers */,
 				489B16F21FDD16FD00EE7C5C /* AppDelegate.swift */,
-				489B16F41FDD16FD00EE7C5C /* ViewController.swift */,
 				489B16F61FDD16FD00EE7C5C /* Main.storyboard */,
 				489B16F91FDD16FD00EE7C5C /* Assets.xcassets */,
 				489B16FB1FDD16FD00EE7C5C /* LaunchScreen.storyboard */,
@@ -110,11 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				489B17051FDD186500EE7C5C /* MovieGridViewController.swift */,
-				489B17061FDD186500EE7C5C /* MovieGridViewController.xib */,
 				48A86CB71FDD4C56000F471F /* SearchViewController.swift */,
-				48A86CB81FDD4C56000F471F /* SearchViewController.xib */,
 				482BA6A21FDD7F54001AE460 /* MovieDetailViewController.swift */,
-				482BA6A31FDD7F54001AE460 /* MovieDetailViewController.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -126,6 +121,16 @@
 				489B170B1FDD1A0D00EE7C5C /* MovieCollectionViewCell.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		48DA8F651FDDE8DD002AF7F4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				489B17061FDD186500EE7C5C /* MovieGridViewController.xib */,
+				482BA6A31FDD7F54001AE460 /* MovieDetailViewController.xib */,
+				48A86CB81FDD4C56000F471F /* SearchViewController.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		A4443B0BCB6923D1DCDA077D /* Frameworks */ = {
@@ -274,7 +279,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				48A86CB91FDD4C56000F471F /* SearchViewController.swift in Sources */,
-				489B16F51FDD16FD00EE7C5C /* ViewController.swift in Sources */,
 				489B16F31FDD16FD00EE7C5C /* AppDelegate.swift in Sources */,
 				489B17071FDD186500EE7C5C /* MovieGridViewController.swift in Sources */,
 				482BA6A41FDD7F54001AE460 /* MovieDetailViewController.swift in Sources */,

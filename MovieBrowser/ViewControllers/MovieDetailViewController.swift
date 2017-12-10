@@ -39,6 +39,11 @@ class MovieDetailViewController: UIViewController {
 
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        self.navigationController?.isNavigationBarHidden = false
+    }
+    
     func setupController(){
         
         posterImageView.sd_setImage(with: NSURL(string: "https://image.tmdb.org/t/p/w500\(posterImagePath!)")! as URL, placeholderImage: nil, options: .continueInBackground, progress: nil, completed: nil)

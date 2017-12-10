@@ -20,6 +20,9 @@ class SearchViewController: UIViewController {
     
     var movieNames = [String]()
     var moviePosterPaths = [String]()
+    var movieDescriptions = [String]()
+    var movieAverageRatings = [String]()
+    var movieReleaseDates = [String]()
     var pageCount = 1
     
 
@@ -34,6 +37,12 @@ class SearchViewController: UIViewController {
         movieCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         movieCollectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier:"MovieCell")
         activityIndicator.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        
+        navigationController?.isNavigationBarHidden = true
     }
     
     
@@ -72,11 +81,15 @@ class SearchViewController: UIViewController {
                         for movie in resultsArray {
                             
                             let movieName = movie["original_title"] as! String
+                            let movieDescription = movie["overview"] as! String!
+                            let movieReleaseDate = movie["release_date"] as! String!
                             
                             if let moviePosterPath = movie["poster_path"] as? String {
                                 
                                 self.moviePosterPaths.append(moviePosterPath)
                                 self.movieNames.append(movieName)
+                                self.movieDescriptions.append(movieDescription!)
+                                self.movieReleaseDates.append(movieReleaseDate!)
                             }
                         }
                     }
@@ -129,6 +142,20 @@ extension SearchViewController : UISearchBarDelegate , UICollectionViewDelegate 
         }
         self.pageCount = self.pageCount + 1
         
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let detailedViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
+        
+        detailedViewController.posterImagePath = moviePosterPaths[indexPath.row]
+        detailedViewController.averageRating = "5.0 Stars"
+        detailedViewController.releaseDate = movieReleaseDates[indexPath.row]
+        detailedViewController.movieTitle = movieNames[indexPath.row]
+        detailedViewController.synopsis = movieDescriptions[indexPath.row]
+        
+        self.navigationController?.pushViewController(detailedViewController, animated: true)
         
     }
     

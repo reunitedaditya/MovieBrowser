@@ -13,29 +13,34 @@ import SDWebImage
 class SearchViewController: UIViewController {
     
     
+    //Outlets
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var movieCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
-    var movieNames = [String]()
-    var moviePosterPaths = [String]()
-    var movieDescriptions = [String]()
-    var movieAverageRatings = [String]()
-    var movieReleaseDates = [String]()
+    
+    //Declarations
+    
+    var movies : [Movie] = [Movie]()
     var pageCount = 1
+    var apiKey = "d2cf994786e92920bf7a4fbe77d2c9e7"
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
       
         navigationController?.isNavigationBarHidden = true
+        
          searchBar.becomeFirstResponder()
-        searchBar.delegate = self
+         searchBar.delegate = self
+        
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
         movieCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         movieCollectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier:"MovieCell")
+        
         activityIndicator.isHidden = true
     }
     
@@ -56,7 +61,7 @@ class SearchViewController: UIViewController {
         
           let movieName = searchBar.text!.replacingOccurrences(of: " ", with: "%20")
         
-        Alamofire.request("https://api.themoviedb.org/3/search/movie?api_key=d2cf994786e92920bf7a4fbe77d2c9e7&language=en-US&query=\(movieName)&page=1&include_adult=false").responseJSON { response in
+        Alamofire.request("https://api.themoviedb.org/3/search/movie?api_key=\(apiKey)&language=en-US&query=\(movieName)&page=1&include_adult=false").responseJSON { response in
             
             if let json = response.result.value {
                 
@@ -83,20 +88,20 @@ class SearchViewController: UIViewController {
                             let movieName = movie["original_title"] as! String
                             let movieDescription = movie["overview"] as! String!
                             let movieReleaseDate = movie["release_date"] as! String!
+                            let averageMovieRating = "\(String(describing: movie["vote_average"]!))"
                             
                             if let moviePosterPath = movie["poster_path"] as? String {
                                 
-                                self.moviePosterPaths.append(moviePosterPath)
-                                self.movieNames.append(movieName)
-                                self.movieDescriptions.append(movieDescription!)
-                                self.movieReleaseDates.append(movieReleaseDate!)
+                                let movie = Movie(name: movieName, poster: moviePosterPath, description: movieDescription!, averageRating: averageMovieRating
+                                    , synopsis: movieDescription!, releaseDate: movieReleaseDate!)
+                                
+                                self.movies.append(movie)
                             }
                         }
                     }
                 }
                 DispatchQueue.main.async {
-                    
-                    print(self.moviePosterPaths)
+                
                     self.activityIndicator.isHidden = true
                     self.movieCollectionView.reloadData()
                 }
@@ -113,15 +118,15 @@ extension SearchViewController : UISearchBarDelegate , UICollectionViewDelegate 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return movieNames.count
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
 
-        cell.movieTitle.text = movieNames[indexPath.row]
-        cell.moviePosterView.sd_setImage(with: NSURL(string: "https://image.tmdb.org/t/p/w500\(moviePosterPaths[indexPath.row])")! as URL, placeholderImage: nil, options: .continueInBackground, progress: nil, completed: nil)
+        cell.movieTitle.text = movies[indexPath.row].name!
+        cell.moviePosterView.sd_setImage(with: NSURL(string: "https://image.tmdb.org/t/p/w500\(movies[indexPath.row].poster!)")! as URL, placeholderImage: nil, options: .continueInBackground, progress: nil, completed: nil)
         
         
         return cell
@@ -129,7 +134,7 @@ extension SearchViewController : UISearchBarDelegate , UICollectionViewDelegate 
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let lastItem = self.movieNames.count - 3
+        let lastItem = self.movies.count - 3
         
         if indexPath.row == lastItem {
             
@@ -149,11 +154,11 @@ extension SearchViewController : UISearchBarDelegate , UICollectionViewDelegate 
         
         let detailedViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
         
-        detailedViewController.posterImagePath = moviePosterPaths[indexPath.row]
-        detailedViewController.averageRating = "5.0 Stars"
-        detailedViewController.releaseDate = movieReleaseDates[indexPath.row]
-        detailedViewController.movieTitle = movieNames[indexPath.row]
-        detailedViewController.synopsis = movieDescriptions[indexPath.row]
+        detailedViewController.posterImagePath = movies[indexPath.row].poster!
+        detailedViewController.averageRating = "\(movies[indexPath.row].averageRating!) Stars"
+        detailedViewController.releaseDate = movies[indexPath.row].releaseDate!
+        detailedViewController.movieTitle = movies[indexPath.row].name!
+        detailedViewController.synopsis = movies[indexPath.row].description!
         
         self.navigationController?.pushViewController(detailedViewController, animated: true)
         
@@ -185,11 +190,11 @@ extension SearchViewController : UISearchBarDelegate , UICollectionViewDelegate 
         
         if searchBar.text != nil {
             
-            movieNames.removeAll()
-            moviePosterPaths.removeAll()
+            movies.removeAll()
             fetchMovies(page: pageCount)
             
             searchBar.resignFirstResponder()
+            
             
         }
         

@@ -18,13 +18,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="119" height="150"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ahi-So-VtA">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ahi-So-VtA">
                         <rect key="frame" x="0.0" y="0.0" width="119" height="150"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9B5-le-rHW">
-                        <rect key="frame" x="3" y="129" width="113" height="18"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9B5-le-rHW">
+                        <rect key="frame" x="2" y="129" width="115" height="18"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.69324933978873238" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
@@ -32,11 +33,11 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ahi-So-VtA" secondAttribute="trailing" id="4PF-Kl-7ZZ"/>
                 <constraint firstAttribute="bottom" secondItem="ahi-So-VtA" secondAttribute="bottom" id="FoR-i1-Tau"/>
-                <constraint firstItem="9B5-le-rHW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="3" id="R1S-c8-KxD"/>
-                <constraint firstAttribute="bottom" secondItem="9B5-le-rHW" secondAttribute="bottom" constant="3" id="cLd-ex-hic"/>
-                <constraint firstAttribute="trailing" secondItem="9B5-le-rHW" secondAttribute="trailing" constant="3" id="glc-hd-UYP"/>
+                <constraint firstItem="9B5-le-rHW" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="2" id="pcs-p5-pc3"/>
                 <constraint firstItem="ahi-So-VtA" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="qpL-4Z-sNP"/>
+                <constraint firstAttribute="bottom" secondItem="9B5-le-rHW" secondAttribute="bottom" constant="3" id="rf5-rh-5a1"/>
                 <constraint firstItem="ahi-So-VtA" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="tjh-P0-rNt"/>
+                <constraint firstAttribute="trailing" secondItem="9B5-le-rHW" secondAttribute="trailing" constant="2" id="tp5-EF-gVF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <size key="customSize" width="119" height="192"/>

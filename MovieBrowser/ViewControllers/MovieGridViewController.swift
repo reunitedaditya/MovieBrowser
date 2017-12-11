@@ -18,15 +18,12 @@ class MovieGridViewController: UIViewController {
     @IBOutlet weak var movieCollectionView: UICollectionView!
     
     //Declarations
-    
-    var movieNames = [String]()
-    var moviePosterPaths = [String]()
-    var movieDescriptions = [String]()
-    var movieAverageRatings = [String]()
-    var movieReleaseDates = [String]()
+
+    var movies : [Movie] = [Movie]()
     var pageCount = 1
     var leftBarButtonItem : UIBarButtonItem?
     var currentFilter : filter = .popular
+    var apiKey = "d2cf994786e92920bf7a4fbe77d2c9e7"
     
     enum filter {
         case topRated
@@ -66,6 +63,7 @@ class MovieGridViewController: UIViewController {
     }
     
     
+    // Fetch Movies from API
     
     func fetchMovies(page : Int , movieFilter : filter){
         
@@ -81,14 +79,12 @@ class MovieGridViewController: UIViewController {
         }
         
         
-        Alamofire.request("https://api.themoviedb.org/3/discover/movie?api_key=d2cf994786e92920bf7a4fbe77d2c9e7&language=en-US&sort_by=\(filter!)&include_adult=false&include_video=false&page=\(page)").responseJSON { response in
+        Alamofire.request("https://api.themoviedb.org/3/discover/movie?api_key=\(apiKey)&language=en-US&sort_by=\(filter!)&include_adult=false&include_video=false&page=\(page)").responseJSON { response in
             
             if let json = response.result.value {
               
                 if let receivedJson = json as? NSDictionary {
-                    
-                    print(receivedJson)
-         
+
                     if let resultsArray = receivedJson.value(forKey: "results") as? [[String : AnyObject]] {
   
                         for movie in resultsArray {
@@ -97,14 +93,16 @@ class MovieGridViewController: UIViewController {
                             let movieDescription = movie["overview"] as! String!
                             
                             let movieReleaseDate = movie["release_date"] as! String!
+                            
+                            let averageMovieRating = "\(String(describing: movie["vote_average"]!))"
                     
                             if let moviePosterPath = movie["poster_path"] as? String {
                                 
-                                self.moviePosterPaths.append(moviePosterPath)
-                                self.movieNames.append(movieName)
-                                self.movieDescriptions.append(movieDescription!)
-//                                self.movieAverageRatings.append(movieAvgRating)
-                                self.movieReleaseDates.append(movieReleaseDate!)
+                            
+                            let movie = Movie(name: movieName, poster: moviePosterPath, description: movieDescription!, averageRating: averageMovieRating , synopsis: movieDescription!, releaseDate: movieReleaseDate!)
+                                
+                                self.movies.append(movie)
+
                             }
                         }
                     }
@@ -120,7 +118,7 @@ class MovieGridViewController: UIViewController {
     
     
     
-    
+   //Open SearchViewController
     
     @objc func showSearch(){
         
@@ -129,14 +127,12 @@ class MovieGridViewController: UIViewController {
         
     }
     
+    
+    //Change filter of the GridView
+    
     @objc func changeFilter(){
         
-        movieNames.removeAll()
-        movieReleaseDates.removeAll()
-        movieDescriptions.removeAll()
-        moviePosterPaths.removeAll()
-        movieAverageRatings.removeAll()
-        movieDescriptions.removeAll()
+          movies.removeAll()
         
         if currentFilter == .topRated {
             
@@ -163,15 +159,15 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return movieNames.count
+        return movies.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as! MovieCollectionViewCell
         
-        cell.movieTitle.text = movieNames[indexPath.row]
-        cell.moviePosterView.sd_setImage(with:   NSURL(string: "https://image.tmdb.org/t/p/w500\(moviePosterPaths[indexPath.row])")! as URL, placeholderImage: nil, options: .continueInBackground, progress: nil, completed: nil)
+        cell.movieTitle.text = movies[indexPath.row].name!
+        cell.moviePosterView.sd_setImage(with:   NSURL(string: "https://image.tmdb.org/t/p/w500\(movies[indexPath.row].poster!)")! as URL, placeholderImage: nil, options: .continueInBackground, progress: nil, completed: nil)
       
 
         return cell
@@ -179,7 +175,7 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let lastItem = self.movieNames.count - 3
+        let lastItem = self.movies.count - 3
         
         if indexPath.row == lastItem {
      
@@ -196,11 +192,11 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
         
         let detailedViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
         
-        detailedViewController.posterImagePath = moviePosterPaths[indexPath.row]
-        detailedViewController.averageRating = "5.0 Stars"
-        detailedViewController.releaseDate = movieReleaseDates[indexPath.row]
-        detailedViewController.movieTitle = movieNames[indexPath.row]
-        detailedViewController.synopsis = movieDescriptions[indexPath.row]
+        detailedViewController.posterImagePath = movies[indexPath.row].poster!
+        detailedViewController.averageRating = "\(movies[indexPath.row].averageRating!) Stars"
+        detailedViewController.releaseDate = movies[indexPath.row].releaseDate!
+        detailedViewController.movieTitle = movies[indexPath.row].name!
+        detailedViewController.synopsis = movies[indexPath.row].description!
         
         self.navigationController?.pushViewController(detailedViewController, animated: true)
         

@@ -41,9 +41,16 @@ class SearchViewController: UIViewController {
         searchBar.placeholder = "Search for Movies"
         self.navigationItem.titleView = searchBar
         searchBar.delegate = self
+       
     
         
         activityIndicator.isHidden = true
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+         searchBar.becomeFirstResponder()
+        
     }
     
 
@@ -52,6 +59,9 @@ class SearchViewController: UIViewController {
 
         navigationController?.popViewController(animated: true)
     }
+    
+    
+    //Api Call to Fetch Movies
     
     func fetchMovies(page : Int){
         
@@ -109,6 +119,8 @@ class SearchViewController: UIViewController {
     
 
 }
+
+// CollectionView and Searchbar Delegate Methods
 
 extension SearchViewController : UISearchBarDelegate , UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout{
     
@@ -192,8 +204,7 @@ extension SearchViewController : UISearchBarDelegate , UICollectionViewDelegate 
             fetchMovies(page: pageCount)
             
             searchBar.resignFirstResponder()
-            
-            
+
         }
         
     }

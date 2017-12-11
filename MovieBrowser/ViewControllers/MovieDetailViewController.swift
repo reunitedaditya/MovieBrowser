@@ -39,7 +39,7 @@ class MovieDetailViewController: UIViewController {
 
         posterImageView.sd_setImage(with: NSURL(string: "https://image.tmdb.org/t/p/w500\(movie.poster!)")! as URL, placeholderImage: nil, options: .continueInBackground, progress: nil, completed: nil)
         movieTitleLabel.text = movie?.name!
-        averageRatingLabel.text = movie?.averageRating!
+        averageRatingLabel.text = "\(movie.averageRating!) Stars"
         releaseDateLabel.text = movie?.releaseDate!
         movieSynopsisLabel.text = movie?.synposis!
         

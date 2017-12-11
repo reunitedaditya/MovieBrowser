@@ -23,14 +23,8 @@ class MovieDetailViewController: UIViewController {
     
     //Declarations
     
-    var posterImagePath : String?
-    var movieTitle : String?
-    var averageRating : String?
-    var releaseDate : String?
-    var synopsis : String?
-    
-    
-    
+    var movie : Movie!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,19 +32,16 @@ class MovieDetailViewController: UIViewController {
         setupController()
 
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
-        self.navigationController?.isNavigationBarHidden = false
-    }
+
+    //Setup ViewController
     
     func setupController(){
-        
-        posterImageView.sd_setImage(with: NSURL(string: "https://image.tmdb.org/t/p/w500\(posterImagePath!)")! as URL, placeholderImage: nil, options: .continueInBackground, progress: nil, completed: nil)
-        movieTitleLabel.text = movieTitle!
-        averageRatingLabel.text = averageRating!
-        releaseDateLabel.text = releaseDate!
-        movieSynopsisLabel.text = synopsis!
+
+        posterImageView.sd_setImage(with: NSURL(string: "https://image.tmdb.org/t/p/w500\(movie.poster!)")! as URL, placeholderImage: nil, options: .continueInBackground, progress: nil, completed: nil)
+        movieTitleLabel.text = movie?.name!
+        averageRatingLabel.text = movie?.averageRating!
+        releaseDateLabel.text = movie?.releaseDate!
+        movieSynopsisLabel.text = movie?.synposis!
         
     }
 

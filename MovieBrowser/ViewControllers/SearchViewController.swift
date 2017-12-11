@@ -15,9 +15,9 @@ class SearchViewController: UIViewController {
     
     //Outlets
     
-    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var movieCollectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var informationLabel: UILabel!
     
     
     
@@ -26,31 +26,27 @@ class SearchViewController: UIViewController {
     var movies : [Movie] = [Movie]()
     var pageCount = 1
     var apiKey = "d2cf994786e92920bf7a4fbe77d2c9e7"
+    let searchBar:UISearchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: 440, height: 40))
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
-      
-        navigationController?.isNavigationBarHidden = true
-        
-         searchBar.becomeFirstResponder()
-         searchBar.delegate = self
-        
+
         movieCollectionView.delegate = self
         movieCollectionView.dataSource = self
         movieCollectionView.register(MovieCollectionViewCell.self, forCellWithReuseIdentifier: "MovieCell")
         movieCollectionView.register(UINib(nibName: "MovieCollectionViewCell", bundle: nil), forCellWithReuseIdentifier:"MovieCell")
         
+      
+        searchBar.placeholder = "Search for Movies"
+        self.navigationItem.titleView = searchBar
+        searchBar.delegate = self
+    
+        
         activityIndicator.isHidden = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        
-        navigationController?.isNavigationBarHidden = true
-    }
-    
-    
+
     
     @IBAction func PopToDiscover(_ sender: Any) {
 
@@ -118,6 +114,12 @@ extension SearchViewController : UISearchBarDelegate , UICollectionViewDelegate 
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
+        
+        if movies.count > 0 {
+            
+            informationLabel.isHidden = true
+        }
+        
         return movies.count
     }
     
@@ -154,11 +156,7 @@ extension SearchViewController : UISearchBarDelegate , UICollectionViewDelegate 
         
         let detailedViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
         
-        detailedViewController.posterImagePath = movies[indexPath.row].poster!
-        detailedViewController.averageRating = "\(movies[indexPath.row].averageRating!) Stars"
-        detailedViewController.releaseDate = movies[indexPath.row].releaseDate!
-        detailedViewController.movieTitle = movies[indexPath.row].name!
-        detailedViewController.synopsis = movies[indexPath.row].description!
+        detailedViewController.movie = movies[indexPath.row]
         
         self.navigationController?.pushViewController(detailedViewController, animated: true)
         

@@ -54,14 +54,13 @@ class MovieGridViewController: UIViewController {
         navigationItem.leftBarButtonItem = leftBarButtonItem!
         navigationController?.navigationBar.topItem?.title = "Discover"
         
-    }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
+        //3D touch
+        if(traitCollection.forceTouchCapability == .available){
+            registerForPreviewing(with: self, sourceView: view)
+        }
         
-        navigationController?.isNavigationBarHidden = false
     }
-    
+
     
     // Fetch Movies from API
     
@@ -152,7 +151,7 @@ class MovieGridViewController: UIViewController {
     
 }
 
-extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout {
+extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewDataSource , UICollectionViewDelegateFlowLayout, UIViewControllerPreviewingDelegate {
     
     
     //CollectionView DataSource and Delegate Methods
@@ -191,12 +190,8 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         let detailedViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
-        
-        detailedViewController.posterImagePath = movies[indexPath.row].poster!
-        detailedViewController.averageRating = "\(movies[indexPath.row].averageRating!) Stars"
-        detailedViewController.releaseDate = movies[indexPath.row].releaseDate!
-        detailedViewController.movieTitle = movies[indexPath.row].name!
-        detailedViewController.synopsis = movies[indexPath.row].description!
+               
+        detailedViewController.movie = movies[indexPath.row]
         
         self.navigationController?.pushViewController(detailedViewController, animated: true)
         
@@ -224,6 +219,33 @@ extension MovieGridViewController : UICollectionViewDelegate , UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsetsMake(1,1,1,1)
+    }
+    
+    //3D Touch Delegate Methods
+    
+    @available(iOS 9.0, *)
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        self.navigationController?.show(viewControllerToCommit, sender: self)
+    }
+    
+    @available(iOS 9.0, *)
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        let locationCell : CGPoint = self.movieCollectionView.convert(location, from: self.view)
+        
+        guard let indexPath = self.movieCollectionView?.indexPathForItem(at: locationCell) else {
+            print("Cell Not found")
+            return nil
+        }
+        
+        print("indexPath.row :: \(indexPath.row)")
+        guard let cell = self.movieCollectionView?.cellForItem(at: indexPath) else { return nil }
+        
+        let didSelectProduct : Movie = self.movies[indexPath.row]
+        let destination: MovieDetailViewController = MovieDetailViewController(nibName: "MovieDetailViewController", bundle: nil)
+        destination.movie = didSelectProduct
+        
+        previewingContext.sourceRect = cell.frame
+        return destination
     }
 }
 
